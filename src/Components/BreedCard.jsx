@@ -1,9 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-undef */
-// src/Components/BreedCard.jsx
-
-import React from 'react';
-
 // Component hiển thị thông tin chi tiết của một giống chó
 // eslint-disable-next-line react/prop-types
 const BreedCard = ({ breed }) => {
@@ -26,16 +22,16 @@ const BreedCard = ({ breed }) => {
         </p>
         <div className="space-y-2 text-gray-600">
           <p>
-            <span className="font-semibold">Tuổi thọ:</span> {breed.life?.min} -{' '}
+            <span className="font-semibold">Tuổi thọ:</span> {breed.life?.min}
             {breed.life?.max} năm
           </p>
           <p>
-            <span className="font-semibold">Cân nặng đực:</span>{' '}
-            {breed.maleWeight?.min} - {breed.maleWeight?.max} lbs
+            <span className="font-semibold">Cân nặng đực:</span>
+            {breed.maleWeight?.min} - {breed.maleWeight?.max} kg
           </p>
           <p>
-            <span className="font-semibold">Cân nặng cái:</span>{' '}
-            {breed.femaleWeight?.min} - {breed.femaleWeight?.max} lbs
+            <span className="font-semibold">Cân nặng cái:</span>
+            {breed.femaleWeight?.min} - {breed.femaleWeight?.max} kg
           </p>
         </div>
       </div>
