@@ -31,31 +31,35 @@ const BreedListPresentation = ({ breeds, loading, error, paginationProps }) => {
   const isNetworkError = error === networkErrorMessage;
 
   // --- LOGIC HIỂN THỊ ĐỂ DỄ ĐỌC HƠN ---
-  // Trường hợp 1: Đang tải dữ liệu
-  if (loading) {
+  // Trường hợp: Đang tải dữ liệu HOẶC có lỗi xảy ra
+  if (loading || error) {
     return (
-      <div className="flex justify-center items-center h-40">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-500"></div>
-        <p className="ml-4 text-xl text-indigo-600">Đang tải thông tin...</p>
-      </div>
-    );
-  }
-
-  // Trường hợp 2: Có lỗi xảy ra (sau khi đã tải xong)
-  if (error) {
-    return (
-      <div
-        className={`px-4 py-3 rounded relative mb-6 ${
-          isNetworkError
-            ? 'bg-yellow-100 border border-yellow-400 text-yellow-700'
-            : 'bg-red-100 text-red-700'
-        }`}
-        role="alert"
-      >
-        <strong className="font-bold">
-          {isNetworkError ? 'Cảnh báo:' : 'Lỗi:'}
-        </strong>
-        <span className="block sm:inline ml-2">{error}</span>
+      <div className="flex flex-col justify-center items-center h-40 text-center">
+        {/* Hiển thị Spinner nếu đang tải */}
+        {loading && (
+          <>
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-500"></div>
+            <p className="ml-4 text-xl text-indigo-600 mt-4">
+              Đang tải thông tin...
+            </p>
+          </>
+        )}
+        {/* Hiển thị thông báo lỗi nếu có lỗi */}
+        {error && (
+          <div
+            className={`px-4 py-3 rounded relative mt-6 max-w-md ${
+              isNetworkError
+                ? 'bg-yellow-100 border border-yellow-400 text-yellow-700'
+                : 'bg-red-100 text-red-700'
+            }`}
+            role="alert"
+          >
+            <strong className="font-bold">
+              {isNetworkError ? 'Cảnh báo:' : 'Lỗi:'}
+            </strong>
+            <span className="block sm:inline ml-2">{error}</span>
+          </div>
+        )}
       </div>
     );
   }

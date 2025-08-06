@@ -42,7 +42,7 @@ export const fetchBreeds = () => {
       dispatch(fetchBreedsSuccess(breeds));
     } catch (error) {
       // Dòng này đã được xóa để không hiển thị lỗi trên console.
-      console.error('Không thể lấy thông tin giống chó:', error);
+      // console.error('Không thể lấy thông tin giống chó:', error);
 
       if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
         dispatch({

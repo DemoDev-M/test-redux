@@ -1,8 +1,10 @@
-// src/pages/DogBreedsPage.js
-
+/* eslint-disable no-undef */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchBreeds } from '../redux/actions/breedsActions';
+import {
+  fetchBreeds,
+  FETCH_BREEDS_FAILURE,
+} from '../redux/actions/breedsActions'; // Thêm FETCH_BREEDS_FAILURE
 import BreedListPresentation from '../Components/BreedListPresentation';
 
 // Đây là component container, chịu trách nhiệm về logic và dữ liệu
@@ -15,8 +17,22 @@ const DogBreedsPage = () => {
   const breedsPerPage = 9;
 
   useEffect(() => {
+    // Gửi yêu cầu lấy dữ liệu
     dispatch(fetchBreeds());
-  }, [dispatch]);
+
+    // Thiết lập một bộ đếm thời gian 10 giây
+    const loadingTimeout = setTimeout(() => {
+      // Gửi action lỗi timeout
+      dispatch({
+        type: FETCH_BREEDS_FAILURE,
+        payload:
+          'Thời gian tải quá lâu. Vui lòng kiểm tra kết nối mạng và thử lại.',
+      });
+    }, 10000); // 10000ms = 10s
+
+    // Dọn dẹp (cleanup) timer khi component unmount hoặc khi dependency thay đổi
+    return () => clearTimeout(loadingTimeout);
+  }, [dispatch]); // Dependency array chỉ có dispatch để useEffect chạy 1 lần duy nhất khi mount
 
   // Logic phân trang được định nghĩa ở đây
   const paginate = pageNumber => setCurrentPage(pageNumber);
