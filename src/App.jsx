@@ -1,12 +1,12 @@
 /* eslint-disable import/no-duplicates */
 // src/App.js
 // eslint-disable-next-line import/no-duplicates
-import BreedList from './Components/BreedList.jsx'; // Import component của bạn
+import DogBreedsPage from './Pages/DogBreedsPage.jsx';
 
 const App = () => {
   return (
     <div className="App">
-      <BreedList />
+      <DogBreedsPage />
     </div>
   );
 };
